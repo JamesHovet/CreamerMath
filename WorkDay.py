@@ -47,10 +47,10 @@ def numIsPalindrome(n):
     else:
         return False
 
-def numIsPalindromeOld(n):
+def numIsPalindromeOld(n): # for every letter up to the center, check if it the same as the letter opposite from it
     l = len(str(n))
     s = str(n)
-    upTo = math.floor(l/2)
+    upTo = math.floor(l/2) #
 
     for i in range(upTo):
         if not s[i] == s[-i -1]:
