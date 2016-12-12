@@ -41,6 +41,15 @@ def p2():
     return s
 
 
+def p2OddIndexedTerms():
+    f = genFib(FOUR_MILLION)
+    s = 0
+    for i in range(1,len(f),2):
+        s+= i
+
+    return s
+
+
 def numIsPalindrome(n):
     if str(n) == str(n)[::-1]: #fancy shortcut, tests if the number as a string is the same as the number as a string reversed, see "extended slices" in docs: https://docs.python.org/2/whatsnew/2.3.html#extended-slices
         return True
@@ -50,7 +59,7 @@ def numIsPalindrome(n):
 def numIsPalindromeOld(n): # for every letter up to the center, check if it the same as the letter opposite from it
     l = len(str(n))
     s = str(n)
-    upTo = math.floor(l/2) #
+    upTo = math.floor(l/2)
 
     for i in range(upTo):
         if not s[i] == s[-i -1]:
