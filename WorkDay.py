@@ -1,4 +1,5 @@
 import math
+from IsPrime import isPrime
 
 def p1():
     c = 0
@@ -75,3 +76,30 @@ def p3():
                 top = a*b
 
     return top
+
+#give prime factorization of any positive integer and reject non-integers
+
+
+
+def p4(n): #super function for the primeFactorize function, gives it the namespace to play in
+    factors = []
+    primeFactorize(n, factors)
+    return factors
+
+
+def primeFactorize(n,factors): #this is recursive, which is too complicated to explain in a comment
+    if isPrime(n) or n <= 1:
+        # print(n ," is prime")
+        factors.append(n)
+    else:
+        a,b = getFirstFactors(n)
+        primeFactorize(a, factors)
+        primeFactorize(b, factors)
+
+def getFirstFactors(n): # returns the first factor and the number divided by that factor
+    for i in range(2,n):
+        if n % i == 0:
+            # print("returning",n,"/",i)
+            return (i,n//i)
+
+#find GCF and LCM of two positive integers less than 100, and tell if the numbers are relativly prime
