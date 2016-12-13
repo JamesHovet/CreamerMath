@@ -82,6 +82,10 @@ def p3():
 
 
 def p4(n): #super function for the primeFactorize function, gives it the namespace to play in
+    if type(n) != int:
+        print("Please enter an integer")
+        return []
+
     factors = []
     primeFactorize(n, factors)
     return factors
@@ -103,3 +107,36 @@ def getFirstFactors(n): # returns the first factor and the number divided by tha
             return (i,n//i)
 
 #find GCF and LCM of two positive integers less than 100, and tell if the numbers are relativly prime
+
+def p5(n1,n2):
+    factors1, factors2 = [],[]
+    primeFactorize(n1, factors1)
+    primeFactorize(n2, factors2)
+
+    #check if relativly prime (or coprime)
+    if not list(set(factors1) & set(factors2)): #if there is no overlap between the prime factors
+        print("The numbers are relativly prime")
+    else:
+        gcf = getGCF(n1,n2)
+        lcm = getLCM(n1,n2,factorsA=factors1,factorsB=factors2) # we already calculated the prime factors, so we can add them in for efficency
+        print("The GCF is:",gcf,"\nthe LCM is:",lcm)
+
+def getGCF(n1,n2):
+    f1,f2 = [],[]
+    for i in range(max([n1,n2]),1,-1):
+        if n1 % i == 0 and n2 % i == 0:
+            return i
+        else:
+            if n1 % i == 0:
+                f1.append(i)
+            if n2 % i == 0:
+                f2.append(i)
+    return max(list(set(f1) & set(f2))) #find greatest value in intersect of all factors of n1 and n2
+
+
+def getLCM(n1,n2,factorsA=None,factorsB=None): #this function takes optional named arguements if we have already calculated the prime factors for a given number, if we do not specifiy the named arguements than the function still works because it just calculates them for us again
+    if not (factorsA and factorsB):
+        factorsA, factorsB = [],[]
+        primeFactorize(n1, factorsA)
+        primeFactorize(n2, factorsB)
+    return min(list(set(factorsA) & set(factorsB))) #find lowest value in intersect of all prime factors of n1 and n2
